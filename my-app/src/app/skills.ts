@@ -1,3 +1,4 @@
+
 export enum Category {
 	Strong = "Strong",
 	Swift = "Swift",

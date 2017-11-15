@@ -1,0 +1,54 @@
+
+<ul style="list-style-type:none">
+  <li *ngFor="let skill of skills"
+    (click)="addMove(skill)">
+    <button class="skill"> <span class="badge">{{skill.id}}</span></button> {{skill.name}}
+  </li>
+</ul>
+
+<div style="position: relative;">
+<table>
+    <tr>
+    	<th> <app-render-skill [skill]="attacks[0]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="attacks[1]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="attacks[2]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="attacks[3]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="attacks[4]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="attacks[5]"></app-render-skill><th>
+        <th *ngIf="enoughAt">
+        	Enough attacks!
+        </th>
+    </tr>
+</table>
+</div>
+
+<div style="position: relative; left: 30px;">
+<table>
+    <tr>
+    	<th> <app-render-skill [skill]="defences[0]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="defences[1]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="defences[2]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="defences[3]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="defences[4]"></app-render-skill><th>
+    	<th> <app-render-skill [skill]="defences[5]"></app-render-skill><th>
+        <th *ngIf="enoughDef">
+        	Enough defences!
+        </th>
+    </tr>
+</table>
+</div>
+
+<div *ngIf="continue">
+	<button class="fight" (click)="startDuel()">Start duel!</button>
+</div>
+
+<div *ngIf="renderDuel">
+	<table>
+		<tr>
+			<th> Your Health: {{hp}}</th> <th> Enemy Health: {{en_hp}}</th>
+		</tr>
+		<tr *ngFor="let round of rounds">
+			<th> <app-render-round [round]="round"></app-render-round></th>
+		</tr>
+	</table>
+</div>
