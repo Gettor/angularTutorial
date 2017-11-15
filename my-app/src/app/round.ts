@@ -1,8 +1,7 @@
-import { Category, Skill } from './skills';
-
 export class Round {
-    atk: Skill;
-    def: Skill;
+    whoGotHit: boolean;
+    atk: string;
+    def: string;
     desc: string;
     damage: number;
 }

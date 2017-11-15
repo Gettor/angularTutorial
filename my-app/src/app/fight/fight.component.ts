@@ -11,16 +11,28 @@ function attacks(id: number): boolean {
   return id % 2 === 0;
 }
 
-function getMoveIndex(id: number): number {
-  return id % 2;
-}
-
-function makeMove(attack: Skill, defence: Skill): Round {
-  var r;
-  r.atk = attack;
-  r.def = defence;
-  r.desc = "DummyDesc";
-  r.damage = 5;
+function makeMove(attack: Skill, defence: Skill, whoGotHit: boolean): Round {
+  var r = new Round();
+  r.atk = attack.name;
+  r.def = defence.name;
+  r.damage = 0;
+  if (!whoGotHit)
+  {
+    r.desc = "You attacked. ";
+  }
+  else
+  {
+    r.desc = "Your opponent attacked. ";
+  }
+  if (attack.category != defence.category)
+  {
+    r.damage = attack.value;
+  }
+  else
+  {
+    r.desc += "Attack was blocked!";
+  }
+  r.whoGotHit = whoGotHit;
   return r;
 }
 
@@ -39,12 +51,18 @@ export class FightComponent implements OnInit {
   skills : Skill[];
   attacks : Skill[] = [];
   defences : Skill[] = [];
+  enemyAtk = EN_ATK;
+  enemyDef = EN_DEF;
+
   enoughAt : boolean = false;
   enoughDef : boolean = false;
   continue : boolean = false;
   renderDuel : boolean = false;
+  fightFinished : boolean = false;
+  verdict : string;
 
   rounds : Round[] = [];
+  roundsToRender : Round[] = [];
   hp : number = 40;
   en_hp : number = 40;
 
@@ -85,30 +103,55 @@ export class FightComponent implements OnInit {
 
   }
 
-  startDuel(): void{
+  makeDuel(): void{
     this.renderDuel = true;
-    var sleepInterval = 500;
-    var sleepCount = sleepInterval;
-    while (this.hp > 0 || this.en_hp > 0 || this.rounds.length < 12)
+    var i = 0;
+    var tmpHp = this.hp;
+    var tmpEn_hp = this.en_hp;
+    while (i < 6 && tmpHp > 0 && tmpEn_hp > 0)
     {
-        sleep(sleepCount).then(() => {
-          sleepCount += sleepInterval;
+      console.log("enemyDef " + this.enemyDef[i].name);
+      var firstMove = makeMove(this.attacks[i], this.enemyDef[i], false);
+      this.rounds.push(firstMove);
+      tmpEn_hp = tmpEn_hp - firstMove.damage;
+      if (tmpEn_hp > 0)
+      {
+        var secondMove = makeMove(this.enemyAtk[i], this.defences[i], true);
+        this.rounds.push(secondMove);
+        tmpHp = tmpHp - secondMove.damage;
+      }
+      i++;
+    }
+  }
 
-          let counter = this.rounds.length;
-          var thisRound;
-          if (attacks(counter))
-          {
-            thisRound = makeMove(this.attacks[getMoveIndex(counter)], EN_DEF[getMoveIndex(counter)]);
-            this.en_hp -= thisRound.damage;
-          }
-          else
-          {
-            thisRound = makeMove(EN_ATK[getMoveIndex(counter)], this.defences[getMoveIndex(counter)]);
-            this.hp -= thisRound.damage;
-          }
-          this.rounds.push(thisRound);
-
-        });
+  nextRound(): void{
+    if (this.fightFinished)
+      return;
+    var round = this.rounds[this.roundsToRender.length];
+    this.roundsToRender.push(round);
+    if (round.whoGotHit)
+    {
+      this.hp -= round.damage;
+    }
+    else
+    {
+      this.en_hp -= round.damage;
+    }
+    if (this.roundsToRender.length == 12 || this.hp <= 0 || this.en_hp <= 0)
+    {
+      this.fightFinished = true;
+      if (this.hp > this.en_hp)
+      {
+        this.verdict = "You won!";
+      }
+      else if (this.hp == this.en_hp)
+      {
+        this.verdict = "It's a draw!";
+      }
+      else
+      {
+        this.verdict = "You lost!";
+      }
     }
   }
 

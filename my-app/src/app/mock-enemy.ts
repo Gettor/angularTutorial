@@ -2,9 +2,19 @@ import { Category, Skill } from './skills';
 import { SKILLS } from './mock-skills';
 
 export const EN_ATK: Skill[] = [
-    SKILLS[1], SKILLS[0], SKILLS[1], SKILLS[2], SKILLS[2], SKILLS[0]
+    {id: 1, name: "Strong Attack", type: false, category: Category.Strong, value: 10},
+    {id: 2, name: "Swift Attack", type: false, category: Category.Swift, value: 10},
+    {id: 3, name: "Mistic Attack", type: false, category: Category.Mistic, value: 10},
+    {id: 1, name: "Strong Attack", type: false, category: Category.Strong, value: 10},
+    {id: 2, name: "Swift Attack", type: false, category: Category.Swift, value: 10},
+    {id: 3, name: "Mistic Attack", type: false, category: Category.Mistic, value: 10},
 ];
 
 export const EN_DEF: Skill[] = [
-    SKILLS[6], SKILLS[5], SKILLS[6], SKILLS[4], SKILLS[4], SKILLS[5]
+    {id: 4, name: "Strong Defense", type: true, category: Category.Strong, value: 10},
+    {id: 5, name: "Swift Defense", type: true, category: Category.Swift, value: 10},
+    {id: 6, name: "Mistic Defense", type: true, category: Category.Mistic, value: 10},
+    {id: 4, name: "Strong Defense", type: true, category: Category.Strong, value: 10},
+    {id: 5, name: "Swift Defense", type: true, category: Category.Swift, value: 10},
+    {id: 6, name: "Mistic Defense", type: true, category: Category.Mistic, value: 10},
 ];

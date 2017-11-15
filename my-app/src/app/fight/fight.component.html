@@ -38,17 +38,20 @@
 </table>
 </div>
 
-<div *ngIf="continue">
-	<button class="fight" (click)="startDuel()">Start duel!</button>
+<div *ngIf="continue && !renderDuel">
+	<button class="fight" (click)="makeDuel()">Start duel!</button>
 </div>
 
 <div *ngIf="renderDuel">
-	<table>
-		<tr>
-			<th> Your Health: {{hp}}</th> <th> Enemy Health: {{en_hp}}</th>
-		</tr>
-		<tr *ngFor="let round of rounds">
-			<th> <app-render-round [round]="round"></app-render-round></th>
-		</tr>
-	</table>
+	<button class="fight" (click)="nextRound()">Show next round</button>
+	<br>
+	Your Health: {{hp}} Enemy Health: {{en_hp}}
+	<div *ngIf="fightFinished">
+		{{verdict}}
+	</div>
+	<ul style="list-style-type:none">
+		<li *ngFor="let round of roundsToRender">
+			<app-render-round [round]="round"></app-render-round>
+		</li>
+	</ul>
 </div>

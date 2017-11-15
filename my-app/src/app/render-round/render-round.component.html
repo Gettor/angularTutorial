@@ -1,3 +1,8 @@
-<p>
-  render-round works!
-</p>
+<div *ngIf="round">
+	{{round.atk}} vs {{round.def}}
+	<br>
+	{{round.desc}}
+	<br>
+	Damage: {{round.damage}}
+	<br><br>
+</div>
