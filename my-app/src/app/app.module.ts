@@ -4,18 +4,23 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SkillPickComponent } from './skill-pick/skill-pick.component';
+import { SkillDetailComponent } from './skill-detail/skill-detail.component';
+import { SkillService } from './skill.service';
+import { AppRoutingModule } from './/app-routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SkillPickComponent
+    SkillPickComponent,
+    SkillDetailComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [SkillService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

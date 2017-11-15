@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
 import { Category, Skill } from '../skills';
-import { SKILLS } from '../mock-skills';
+import { SkillService } from '../skill.service'
 
 @Component({
   selector: 'app-skill-pick',
@@ -10,16 +11,18 @@ import { SKILLS } from '../mock-skills';
 })
 export class SkillPickComponent implements OnInit {
 
-  skills = SKILLS;
-  selectedSkill : Skill;
+  skills : Skill[];
 
-  constructor() { }
+  constructor(
+    private skillService: SkillService) { }
 
   ngOnInit() {
+    this.getSkills();
   }
 
-  onSelect(skill: Skill): void {
-    this.selectedSkill = skill;
+  getSkills(): void {
+    this.skillService.getSkills()
+      .subscribe(skills => this.skills = skills);
   }
 
 }

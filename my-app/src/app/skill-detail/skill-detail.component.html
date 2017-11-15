@@ -1,0 +1,6 @@
+<div *ngIf="skill">
+    <h3>{{skill.name}}</h3>
+    This is a {{skill.category}} {{skill.type ? 'defense which prevents ' : 'attack which deals '}} {{skill.value}} points of damage.
+</div>
+<br>
+<button (click)="goBack()">go back</button>

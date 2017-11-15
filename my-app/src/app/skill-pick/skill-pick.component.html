@@ -1,21 +1,10 @@
 <h2> Available Skills </h2>
 
-<ul class="skills">
-  <li *ngFor="let skill of skills" (click)="onSelect(skill)">
-    <div style="cursor:pointer;"> <span class="badge">{{skill.id}}</span> {{skill.name}}</div>
+<ul style="list-style-type:none">
+  <li *ngFor="let skill of skills" 
+  	routerLink="/skill/{{skill.id}}">
+    <button class="skill"> <span class="badge">{{skill.id}}</span></button> {{skill.name}}
   </li>
 </ul>
 
-<div *ngIf="selectedSkill">
-	<h3>{{selectedSkill.name}}</h3>
-	This is a {{selectedSkill.category}} {{selectedSkill.type ? 'defense which prevents ' : 'attack which deals '}} {{selectedSkill.value}} points of damage.
-</div>
-
-
-<!-- <div>
-    <label>name:
-      <input [(ngModel)]="skill.name" placeholder="name">
-    </label>
-</div>
-
-Skill {{skill.name}} is {{skill.type ? 'a defense which prevents ' : 'an attack which deals '}} {{skill.value}} points of damage . -->
+<!-- <app-skill-detail [skill]="selectedSkill"></app-skill-detail> -->
