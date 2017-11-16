@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
 import { Category, Skill } from '../skills';
 

@@ -92,7 +92,7 @@ export class FightComponent implements OnInit {
     {
       this.defences.push(skill);
     }
-    else if (this.attacks.length < 6)
+    else if (!skill.type && this.attacks.length < 6)
     {
       this.attacks.push(skill);
     }
@@ -100,10 +100,22 @@ export class FightComponent implements OnInit {
     {
       this.continue = true;
     }
+  }
 
+  stepDuel(): void{
+    if (this.renderDuel)
+    {
+      this.nextRound();
+    }
+    else
+    {
+      this.makeDuel();
+    }
   }
 
   makeDuel(): void{
+    if (!this.continue)
+      return;
     this.renderDuel = true;
     var i = 0;
     var tmpHp = this.hp;
