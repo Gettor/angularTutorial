@@ -1,11 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>{{title}}</h1>
-</div>
-<nav>
-  <a routerLink="/">Home</a>
-  <a routerLink="/skills">Skills</a>
-  <a routerLink="/fight">Fight</a>
+<nav class="menu">
+	<table style="width: 100%;">
+		<tr><td>
+  <button class = "menuButton" routerLink="/">Home</button>
+</td></tr><tr><td>
+  <button class = "menuButton" routerLink="/skills">Skills</button>
+</td></tr><tr><td>
+  <button class = "menuButton" routerLink="/fight">Fight</button>
+</td></tr></table>
 </nav>
+<div class="main">
 <router-outlet></router-outlet>
-<app-messages></app-messages>
+<!-- <app-messages></app-messages> -->
+</div>

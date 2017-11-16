@@ -1,8 +1,7 @@
 
-<ul style="list-style-type:none">
-  <li *ngFor="let skill of skills"
-    (click)="addMove(skill)">
-    <button class="skill"> <span class="badge">{{skill.id}}</span></button> {{skill.name}}
+<ul style="list-style-type:none; columns:2;">
+  <li *ngFor="let skill of skills">
+    <button class="skill" (click)="addMove(skill)"> <span class="badge">{{skill.id}}</span></button> {{skill.name}}
   </li>
 </ul>
 
@@ -50,8 +49,8 @@
 		{{verdict}}
 	</div>
 	<ul style="list-style-type:none">
-		<li *ngFor="let round of roundsToRender">
-			<app-render-round [round]="round"></app-render-round>
+		<li *ngFor="let round of roundsToRender; let i=index">
+			<app-render-round [round]="round" *ngIf="i+3 >= roundsToRender.length"></app-render-round>
 		</li>
 	</ul>
 </div>

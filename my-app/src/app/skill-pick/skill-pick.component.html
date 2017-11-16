@@ -1,9 +1,8 @@
 <h2> Available Skills </h2>
 
 <ul style="list-style-type:none">
-  <li *ngFor="let skill of skills" 
-  	routerLink="/skill/{{skill.id}}">
-    <button class="skill"> <span class="badge">{{skill.id}}</span></button> {{skill.name}}
+  <li *ngFor="let skill of skills">
+    <button class="skill" routerLink="/skill/{{skill.id}}"> <span class="badge">{{skill.id}}</span></button> {{skill.name}}
   </li>
 </ul>
 
