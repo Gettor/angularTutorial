@@ -1,13 +1,17 @@
-.menu {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  left: 10px;
-  top: 10px;
+.mainGrid {
+  display: grid;
+  grid-template-columns: 20px 200px 50px 1fr 20px;
+  grid-template-rows: 20px 900px 20px;
+  grid-template-areas: 
+  ". .       . .       ."
+  ". menuSub . mainSub ."
+  ". .       . .       .";
+}
+
+.menuSubGrid {
+  grid-area: menuSub;
+  display: subgrid;
   background-color: #b7b7b7;
-  width: 15%;
-  height: 96vh;
-  float: left;
 }
 
 .menuButton {
@@ -27,11 +31,20 @@
     background-color: #75a072;
 }
 
-.main {
-  box-sizing: border-box;
+.menuBytton:focus {
+  border: none;
+  outline:none;
+}
+
+.menuBytton::-moz-focus-inner {
+  outline:none !important;
+  border: none !important;
+}
+
+.mainSubGrid {
+  grid-area: mainSub;
+  display: subgrid;
   background-color: #e8ae68;
-  width: 80%;
-  float: right;
 }
 
 h1 {

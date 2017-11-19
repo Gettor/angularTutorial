@@ -1,15 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<nav class="menu">
-	<table style="width: 100%;">
-		<tr><td>
-  <button class = "menuButton" routerLink="/">Home</button>
-</td></tr><tr><td>
-  <button class = "menuButton" routerLink="/skills">Skills</button>
-</td></tr><tr><td>
-  <button class = "menuButton" routerLink="/fight">Fight</button>
-</td></tr></table>
-</nav>
-<div class="main">
-<router-outlet></router-outlet>
-<!-- <app-messages></app-messages> -->
+<div class="mainGrid">
+    <div class="menuSubGrid">
+      <button class = "menuButton" routerLink="/">Home</button>
+      <button class = "menuButton" routerLink="/skills">Skills</button>
+      <button class = "menuButton" routerLink="/fight">Fight</button>
+    </div>
+    <div class="mainSubGrid">
+        <router-outlet></router-outlet>
+        <!-- <app-messages></app-messages> -->
+    </div>
 </div>
