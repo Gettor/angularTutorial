@@ -1,7 +1,9 @@
 <div class="fightComp">
-  <div *ngFor="let skill of skills; let i=index" class="renderedSkill_{{i}}">
-    <!-- renderedSkill_{{i}} -->
-    <app-render-skill [skill]="skill" (click)="addMove(skill)"></app-render-skill>
+  <div class="renderedSkills">
+    <div *ngFor="let skill of skills; let i=index" class="renderedSkill_{{i}}">
+      <!-- renderedSkill_{{i}} -->
+      <app-render-skill [skill]="skill" (click)="addMove(skill)"></app-render-skill>
+    </div>
   </div>
     <div class="moves">
         <div class="attack_0">
