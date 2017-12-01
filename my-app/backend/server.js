@@ -1,9 +1,27 @@
 const express = require('express')
+const assert = require('assert')
+const mongo = require('mongodb')
+const monk = require('monk')
 const app = express()
 const port = 3000
 
-app.get('/', (request, response) => {
-  response.send('Hello from Express!')
+var db = monk('localhost:27017/duelDb')
+
+app.get('/skills', (request, response) => {
+  console.log("GET request for /skills")
+
+  var collection = db.get('skills');
+  collection.find({},{},function(err, res){
+    response.send(JSON.stringify(res));
+  })
+})
+
+app.get('/skill/:id', (request, response) => {
+  console.log("GET request for /skill with id = " + request.params.id)
+  var collection = db.get('skills');
+  collection.findOne({ id: parseInt(request.params.id) }, {}, function(err, res){
+    response.send(JSON.stringify(res));
+  })
 })
 
 app.listen(port, (err) => {
