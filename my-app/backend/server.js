@@ -5,6 +5,13 @@ const monk = require('monk')
 const app = express()
 const port = 3000
 
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+  next();
+})
+
 var db = monk('localhost:27017/duelDb')
 
 app.get('/skills', (request, response) => {
