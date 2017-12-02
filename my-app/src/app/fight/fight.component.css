@@ -49,18 +49,51 @@
     grid-template-columns: 200px 200px 100px 400px;
     grid-template-rows: 100px 300px;
     grid-template-areas:
-    "myHp           myHp      verdict   hisHp    "
+    "myHpArea       myHpArea  verdict   hisHpArea"
     "previousRounds thisRound thisRound thisRound"
 }
 
-.myHp {
-    grid-area: myHp;
+.myHpArea {
+    grid-area: myHpArea;
     background-color: #00ffff;
 }
 
-.hisHp {
-    grid-area: hisHp;
+.hisHpArea {
+    grid-area: hisHpArea;
     background-color: #ff40ff;
+}
+
+.health-bar {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 200px;
+  height: 20px;
+  padding: 5px;
+  background: #ddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  position: relative;
+}
+.bar {
+  background: #c54;
+  width: 100%;
+  height: 10px;
+  position: relative;
+  
+  transition: width .5s linear;
+}
+
+.hit {
+  background: rgba(255,255,255,0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 0px;
+  
+  transition: width .5s linear;
 }
 
 .verdict {
@@ -153,126 +186,3 @@
 .defence_5 {
     grid-area: defence_5;
 }
-
-/*.fightComp {
-    background-color: #777777;
-    display: grid;
-    grid-template-columns: 10% 10% 1fr 1fr 10% 10%;
-    grid-template-rows: 100px 100px 100px 150px minmax(300px, 1fr);
-    grid-template-areas:
-    ". renderedSkills renderedSkills   renderedSkills renderedSkills ."
-    ". renderedSkills renderedSkills   renderedSkills renderedSkills ."
-    ". renderedSkills renderedSkills   renderedSkills renderedSkills ."
-    ". .              moves            moves          fightButtonDiv ."
-    ". fight          fight            fight          fight          ."
-}
-
-.renderedSkills {
-    grid-area: renderedSkills;
-    display: grid;
-    background-color: #abcdef;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas:
-    "renderedSkill_0 renderedSkill_3"
-    "renderedSkill_1 renderedSkill_4"
-    "renderedSkill_2 renderedSkill_5"
-}
-
-.fightButtonDiv {
-    grid-area: fightButtonDiv;
-    background-color: blue;
-}
-
-.fight {
-    grid-area: fight;
-    background-color: red;
-}
-
-.moves {
-    grid-area: moves;
-    display: grid;
-    background-color: #76baff;
-    grid-template-columns: 1fr 60px 60px 60px 60px 60px 60px 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-    ". attack_0  attack_1  attack_2  attack_3  attack_4  attack_5  ."
-    ". defence_0 defence_1 defence_2 defence_3 defence_4 defence_5 ."
-}
-
-[class^="renderedSkill_"] {
-    background-color: #123fed;
-}
-
-.renderedSkill_0 {
-    grid-area: renderedSkill_0;
-}
-
-.renderedSkill_1 {
-    grid-area: renderedSkill_1;
-}
-
-.renderedSkill_2 {
-    grid-area: renderedSkill_2;
-}
-
-.renderedSkill_3 {
-    grid-area: renderedSkill_3;
-}
-
-.renderedSkill_4 {
-    grid-area: renderedSkill_4;
-}
-
-.renderedSkill_5 {
-    grid-area: renderedSkill_5;
-}
-
-.attack_0 {
-    grid-area: attack_0;
-}
-
-.attack_1 {
-    grid-area: attack_1;
-}
-
-.attack_2 {
-    grid-area: attack_2;
-}
-
-.attack_3 {
-    grid-area: attack_3;
-}
-
-.attack_4 {
-    grid-area: attack_4;
-}
-
-.attack_5 {
-    grid-area: attack_5;
-}
-
-.defence_0 {
-    grid-area: defence_0;
-}
-
-.defence_1 {
-    grid-area: defence_1;
-}
-
-.defence_2 {
-    grid-area: defence_2;
-}
-
-.defence_3 {
-    grid-area: defence_3;
-}
-
-.defence_4 {
-    grid-area: defence_4;
-}
-
-.defence_5 {
-    grid-area: defence_5;
-}
-*/

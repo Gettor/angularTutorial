@@ -51,16 +51,21 @@
       </div> -->
   </div>
   <div class="fightButtonDiv">
-      <button class="fightButton" (click)="stepDuel()">{{ renderDuel ? 'Show next round' : 'Start duel!' }}</button>
+      <button class="fightButton"(click)="stepDuel()">{{ renderDuel ? 'Show next round' : 'Start duel!' }}</button>
+      <button (click)="testHp()">TestHp</button>
   </div>
 
   <div class="fight">
       <!-- <div *ngIf="renderDuel"> -->
-          <div class="myHp">
+          <div class="myHpArea">
             Your Health: {{hp}}
-            <meter value="{{hp}}" min="0" max="40"></meter>
+            <div class="health-bar" id="my-health-bar">
+              <div class="bar" id="my-bar">
+                  <div class="hit" id="my-hit"></div>
+              </div>
+            </div>
           </div>
-          <div class="hisHp">
+          <div class="hisHpArea">
             Enemy Health: {{en_hp}}
             <meter value="{{en_hp}}" min="0" max="40"></meter>
           </div>

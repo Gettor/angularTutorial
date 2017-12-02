@@ -66,6 +66,9 @@ export class FightComponent implements OnInit {
   hp : number = 40;
   en_hp : number = 40;
 
+  total : number = 40;
+  val : number = 40;
+
 
   constructor(
     private skillService: SkillService) { }
@@ -100,6 +103,22 @@ export class FightComponent implements OnInit {
     {
       this.continue = true;
     }
+  }
+
+  testHp(): void{
+    var myBar = document.getElementById("my-bar");
+    var myHit = document.getElementById("my-hit");
+
+    var hit = 8;
+    var newValue = this.val - hit;
+    var barWidth = (newValue / this.total) * 100 + "%";
+    var hitWidth = (hit / this.val) * 100 + "%";
+    myHit.style.width = hitWidth;
+    setTimeout(function(){
+      myHit.style.width = "0";
+      myBar.style.width = barWidth;
+    }, 500);
+    this.val = newValue;
   }
 
   stepDuel(): void{
