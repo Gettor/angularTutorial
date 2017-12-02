@@ -1,6 +1,131 @@
 .fightComp {
     background-color: #777777;
     display: grid;
+    grid-template-columns: 1fr 150px 150px 150px 150px 300px 1fr;
+    grid-template-rows: 400px 300px 50px 400px;
+    grid-template-areas:
+    ". preparationArea preparationArea preparationArea preparationArea preparationArea ."
+    ". renderedSkills  renderedSkills  renderedSkills  moves           moves           ."
+    ". .               .               fightButtonDiv  fightButtonDiv  .               ."
+    ". fight           fight           fight           fight           fight           ."
+}
+
+.preparationArea {
+    background-color: #993456;
+    grid-area: preparationArea;
+}
+
+.renderedSkills {
+    grid-area: renderedSkills;
+    display: grid;
+    background-color: #ff0;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+    "renderedSkill_0 renderedSkill_1 renderedSkill_2"
+    "renderedSkill_3 renderedSkill_4 renderedSkill_5"
+}
+
+.moves {
+    grid-area: moves;
+    display: grid;
+    background-color: #76baff;
+    grid-template-columns: 1fr 60px 60px 60px 60px 60px 60px 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+    ". attack_0  attack_1  attack_2  attack_3  attack_4  attack_5  ."
+    ". defence_0 defence_1 defence_2 defence_3 defence_4 defence_5 ."
+}
+
+.fightButtonDiv {
+    grid-area: fightButtonDiv;
+    background-color: blue;
+}
+
+.fight {
+    grid-area: fight;
+    background-color: red;
+}
+
+[class^="renderedSkill_"] {
+    background-color: #127f00;
+}
+
+.renderedSkill_0 {
+    grid-area: renderedSkill_0;
+}
+
+.renderedSkill_1 {
+    grid-area: renderedSkill_1;
+}
+
+.renderedSkill_2 {
+    grid-area: renderedSkill_2;
+}
+
+.renderedSkill_3 {
+    grid-area: renderedSkill_3;
+}
+
+.renderedSkill_4 {
+    grid-area: renderedSkill_4;
+}
+
+.renderedSkill_5 {
+    grid-area: renderedSkill_5;
+}
+
+.attack_0 {
+    grid-area: attack_0;
+}
+
+.attack_1 {
+    grid-area: attack_1;
+}
+
+.attack_2 {
+    grid-area: attack_2;
+}
+
+.attack_3 {
+    grid-area: attack_3;
+}
+
+.attack_4 {
+    grid-area: attack_4;
+}
+
+.attack_5 {
+    grid-area: attack_5;
+}
+
+.defence_0 {
+    grid-area: defence_0;
+}
+
+.defence_1 {
+    grid-area: defence_1;
+}
+
+.defence_2 {
+    grid-area: defence_2;
+}
+
+.defence_3 {
+    grid-area: defence_3;
+}
+
+.defence_4 {
+    grid-area: defence_4;
+}
+
+.defence_5 {
+    grid-area: defence_5;
+}
+
+/*.fightComp {
+    background-color: #777777;
+    display: grid;
     grid-template-columns: 10% 10% 1fr 1fr 10% 10%;
     grid-template-rows: 100px 100px 100px 150px minmax(300px, 1fr);
     grid-template-areas:
@@ -32,9 +157,6 @@
     grid-area: fight;
     background-color: red;
 }
-
-
-/*Subgrid for moves*/
 
 .moves {
     grid-area: moves;
@@ -122,3 +244,4 @@
 .defence_5 {
     grid-area: defence_5;
 }
+*/
