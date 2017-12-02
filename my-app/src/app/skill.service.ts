@@ -13,15 +13,22 @@ export class SkillService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
+  private requestBase = "http://localhost:3000";
+
   getSkills(): Observable<Skill[]> {
     this.messageService.add("SkillService: getSkills()");
-    return this.http.get("http://localhost:3000/skills")
+    const request = this.requestBase + "/skills"
+    return this.http.get(request)
       .map(data => <Skill[]>(data));;
   }
 
   getSkill(id: number) : Observable<Skill> {
     this.messageService.add("SkillService: getSkill(" + id + ")");
-    return of(SKILLS.find(skill => skill.id === id));
+    const request = this.requestBase + "/skill/" + id.toString()
+    return this.http.get(request)
+      .map(data => <Skill>(data));
+    // return of(SKILLS.find(skill => skill.id === id));
+
   }
 
 }
