@@ -1,8 +1,12 @@
-<div *ngIf="round">
-	{{round.atk}} vs {{round.def}}
-	<br>
-	{{round.desc}}
-	<br>
-	Damage: {{round.damage}}
-	<br><br>
+<div *ngIf="round && my_skill && his_skill">
+  <div class="roundArea">
+    <div class="mySkill">
+      <img [src]="my_skill.imagePath">
+    </div>
+    <div class="delimeter">vs</div>
+    <div class="hisSkill">
+      <img [src]="his_skill.imagePath">
+    </div>
+    <div class="aftermath"></div>
+  </div>
 </div>

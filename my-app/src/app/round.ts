@@ -1,7 +1,8 @@
+// attacker == true ? me : him
 export class Round {
-    whoGotHit: boolean;
-    atk: string;
-    def: string;
+    attacker: boolean;
+    my_skill: number;
+    his_skill: number;
     desc: string;
     damage: number;
 }

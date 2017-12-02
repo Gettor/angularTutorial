@@ -1,8 +1,6 @@
 <div *ngIf="skill">
-	<button class="chosenSkill" [ngStyle]="{'background-image': 'url(' + skill.imagePath + ')'}" >{{skill.id}}</button>
+	<button class="chosenSkill" [ngStyle]="{'background-image': 'url(' + skill.imagePath + ')'}" ></button>
 </div>
 <div *ngIf="!skill">
 	<button class="emptySkill">0</button>
 </div>
-
-

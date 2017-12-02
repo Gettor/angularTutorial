@@ -11,18 +11,21 @@ function attacks(id: number): boolean {
   return id % 2 === 0;
 }
 
-function makeMove(attack: Skill, defence: Skill, whoGotHit: boolean): Round {
+// attacker == true ? me : him
+function makeMove(attack: Skill, defence: Skill, attacker: boolean): Round {
   var r = new Round();
-  r.atk = attack.name;
-  r.def = defence.name;
   r.damage = 0;
-  if (!whoGotHit)
+  if (attacker)
   {
-    r.desc = "You attacked. ";
+    r.desc = "Your " + attack.name + " was blocked by " + defence.name + ".";
+    r.my_skill = attack.id;
+    r.his_skill = defence.id;
   }
   else
   {
-    r.desc = "Your opponent attacked. ";
+    r.desc = "Enemy used " + attack.name + ", you blocked with " + defence.name + ".";
+    r.his_skill = attack.id;
+    r.my_skill = defence.id;
   }
   if (attack.category != defence.category)
   {
@@ -30,9 +33,9 @@ function makeMove(attack: Skill, defence: Skill, whoGotHit: boolean): Round {
   }
   else
   {
-    r.desc += "Attack was blocked!";
+    r.desc += " Attack was blocked!";
   }
-  r.whoGotHit = whoGotHit;
+  r.attacker = attacker;
   return r;
 }
 
@@ -63,15 +66,12 @@ export class FightComponent implements OnInit {
 
   rounds : Round[] = [];
   roundsToRender : Round[] = [];
+  max_hp : number = 40;
   hp : number = 40;
+  max_en_hp : number = 40;
   en_hp : number = 40;
 
-  total : number = 40;
-  val : number = 40;
-
-
-  constructor(
-    private skillService: SkillService) { }
+  constructor(private skillService: SkillService) { }
 
   ngOnInit() {
     this.getSkills();
@@ -105,20 +105,42 @@ export class FightComponent implements OnInit {
     }
   }
 
-  testHp(): void{
-    var myBar = document.getElementById("my-bar");
-    var myHit = document.getElementById("my-hit");
+  // who == true ? me : him (who was attacking)
+  updateHp(who: boolean, hit: number): void {
+    var barName = "his-bar"
+    var hitName = "his-hit"
+    if (!who)
+    {
+      barName = "my-bar"
+      hitName = "my-hit"
+    }
+    var myBar = document.getElementById(barName);
+    var myHit = document.getElementById(hitName);
 
-    var hit = 8;
-    var newValue = this.val - hit;
-    var barWidth = (newValue / this.total) * 100 + "%";
-    var hitWidth = (hit / this.val) * 100 + "%";
-    myHit.style.width = hitWidth;
-    setTimeout(function(){
-      myHit.style.width = "0";
-      myBar.style.width = barWidth;
-    }, 500);
-    this.val = newValue;
+    if (!who)
+    {
+      var newValue = this.hp - hit;
+      var barWidth = (newValue / this.max_hp) * 100 + "%";
+      var hitWidth = (hit / this.hp) * 100 + "%";
+      myHit.style.width = hitWidth;
+      setTimeout(function(){
+        myHit.style.width = "0";
+        myBar.style.width = barWidth;
+      }, 500);
+      this.hp = newValue;
+    }
+    else
+    {
+      var newValue = this.en_hp - hit;
+      var barWidth = (newValue / this.max_en_hp) * 100 + "%";
+      var hitWidth = (hit / this.en_hp) * 100 + "%";
+      myHit.style.width = hitWidth;
+      setTimeout(function(){
+        myHit.style.width = "0";
+        myBar.style.width = barWidth;
+      }, 500);
+      this.en_hp = newValue;
+    }
   }
 
   stepDuel(): void{
@@ -141,13 +163,12 @@ export class FightComponent implements OnInit {
     var tmpEn_hp = this.en_hp;
     while (i < 6 && tmpHp > 0 && tmpEn_hp > 0)
     {
-      console.log("enemyDef " + this.enemyDef[i].name);
-      var firstMove = makeMove(this.attacks[i], this.enemyDef[i], false);
+      var firstMove = makeMove(this.attacks[i], this.enemyDef[i], true);
       this.rounds.push(firstMove);
       tmpEn_hp = tmpEn_hp - firstMove.damage;
       if (tmpEn_hp > 0)
       {
-        var secondMove = makeMove(this.enemyAtk[i], this.defences[i], true);
+        var secondMove = makeMove(this.enemyAtk[i], this.defences[i], false);
         this.rounds.push(secondMove);
         tmpHp = tmpHp - secondMove.damage;
       }
@@ -160,14 +181,7 @@ export class FightComponent implements OnInit {
       return;
     var round = this.rounds[this.roundsToRender.length];
     this.roundsToRender.push(round);
-    if (round.whoGotHit)
-    {
-      this.hp -= round.damage;
-    }
-    else
-    {
-      this.en_hp -= round.damage;
-    }
+    this.updateHp(round.attacker, round.damage);
     if (this.roundsToRender.length == 12 || this.hp <= 0 || this.en_hp <= 0)
     {
       this.fightFinished = true;
