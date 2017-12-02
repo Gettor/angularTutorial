@@ -2,7 +2,7 @@
     background-color: #777777;
     display: grid;
     grid-template-columns: 1fr 150px 150px 150px 150px 300px 1fr;
-    grid-template-rows: 400px 300px 50px 400px;
+    grid-template-rows: 200px 300px 50px 400px;
     grid-template-areas:
     ". preparationArea preparationArea preparationArea preparationArea preparationArea ."
     ". renderedSkills  renderedSkills  renderedSkills  moves           moves           ."
@@ -44,7 +44,38 @@
 
 .fight {
     grid-area: fight;
+    display: grid;
     background-color: red;
+    grid-template-columns: 200px 200px 100px 400px;
+    grid-template-rows: 100px 300px;
+    grid-template-areas:
+    "myHp           myHp      verdict   hisHp    "
+    "previousRounds thisRound thisRound thisRound"
+}
+
+.myHp {
+    grid-area: myHp;
+    background-color: #00ffff;
+}
+
+.hisHp {
+    grid-area: hisHp;
+    background-color: #ff40ff;
+}
+
+.verdict {
+    grid-area: verdict;
+    background-color: #7788aa;
+}
+
+.thisRound {
+    grid-area: thisRound;
+    background-color: #099015;
+}
+
+.previousRounds {
+    rid-area: previousRounds;
+    background-color: #909015;
 }
 
 [class^="renderedSkill_"] {

@@ -55,21 +55,27 @@
   </div>
 
   <div class="fight">
-      <div *ngIf="renderDuel">
-          <div class="hpInfo">
-          Your Health: {{hp}}
-          <meter value="{{hp}}" min="0" max="40"></meter><br>
-          Enemy Health: {{en_hp}}
-          <meter value="{{en_hp}}" min="0" max="40"></meter>
+      <!-- <div *ngIf="renderDuel"> -->
+          <div class="myHp">
+            Your Health: {{hp}}
+            <meter value="{{hp}}" min="0" max="40"></meter>
           </div>
-          <div *ngIf="fightFinished">
+          <div class="hisHp">
+            Enemy Health: {{en_hp}}
+            <meter value="{{en_hp}}" min="0" max="40"></meter>
+          </div>
+          <div class="verdict">
               {{verdict}}
           </div>
-          <ul style="list-style-type:none">
+          <div class="thisRound">
+            <ul style="list-style-type:none">
               <li *ngFor="let round of roundsToRender; let i=index">
-                  <app-render-round [round]="round" *ngIf="i+3 >= roundsToRender.length"></app-render-round>
+                <app-render-round [round]="round" *ngIf="i+1 >= roundsToRender.length"></app-render-round>
               </li>
-          </ul>
-      </div>
+            </ul>
+          </div>
+          <div class="previousRounds">
+          </div>
+      <!-- </div> -->
   </div>
 </div>
