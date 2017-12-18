@@ -51,39 +51,11 @@
       </div> -->
   </div>
   <div class="fightButtonDiv">
-      <button class="fightButton"(click)="stepDuel()">{{ renderDuel ? 'Show next round' : 'Start duel!' }}</button>
+      <button *ngIf="!removeStartBattleButton" class="fightButton"(click)="stepDuel()">Start duel!</button>
+      <div *ngIf="removeStartBattleButton">Duel commences!</div>
   </div>
 
   <div class="fight">
-      <!-- <div *ngIf="renderDuel"> -->
-          <div class="myHpArea">
-            Your Health: {{hp}}
-            <div class="health-bar" id="my-health-bar">
-              <div class="bar" id="my-bar">
-                  <div class="hit" id="my-hit"></div>
-              </div>
-            </div>
-          </div>
-          <div class="hisHpArea">
-            Enemy Health: {{en_hp}}
-            <div class="health-bar" id="his-health-bar">
-              <div class="bar" id="his-bar">
-                  <div class="hit" id="his-hit"></div>
-              </div>
-            </div>
-          </div>
-          <div class="verdict">
-              {{verdict}}
-          </div>
-          <div class="thisRound">
-            <ul style="list-style-type:none">
-              <li *ngFor="let round of roundsToRender; let i=index">
-                <app-render-round [round]="round" *ngIf="i+1 >= roundsToRender.length"></app-render-round>
-              </li>
-            </ul>
-          </div>
-          <div class="previousRounds">
-          </div>
-      <!-- </div> -->
+    <app-render-fight *ngIf="removeStartBattleButton" [fight]="fight"></app-render-fight>
   </div>
 </div>

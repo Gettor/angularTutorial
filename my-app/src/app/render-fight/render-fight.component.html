@@ -1,0 +1,30 @@
+<div class="fight">
+  <div class="myHpArea">
+    Your Health: {{my_hp}}
+    <div class="health-bar" id="my-health-bar">
+      <div class="bar" id="my-bar">
+          <div class="hit" id="my-hit"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hisHpArea">
+    Enemy Health: {{en_hp}}
+    <div class="health-bar" id="his-health-bar">
+      <div class="bar" id="his-bar">
+          <div class="hit" id="his-hit"></div>
+      </div>
+    </div>
+  </div>
+  <div class="verdict">
+      {{verdict}}
+  </div>
+  <div class="thisRound">
+    <ul style="list-style-type:none">
+      <li *ngFor="let round of renderedRounds; let i=index">
+        <app-render-round [round]="round" *ngIf="i+1 >= renderedRounds.length"></app-render-round>
+      </li>
+    </ul>
+  </div>
+  <div class="previousRounds">
+  </div>
+</div>

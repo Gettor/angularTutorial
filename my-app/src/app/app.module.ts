@@ -13,6 +13,7 @@ import { RenderSkillComponent } from './render-skill/render-skill.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { RenderRoundComponent } from './render-round/render-round.component';
+import { RenderFightComponent } from './render-fight/render-fight.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RenderRoundComponent } from './render-round/render-round.component';
     FightComponent,
     RenderSkillComponent,
     MessagesComponent,
-    RenderRoundComponent
+    RenderRoundComponent,
+    RenderFightComponent
   ],
   imports: [
     BrowserModule,

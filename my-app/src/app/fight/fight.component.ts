@@ -1,15 +1,13 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 
+import { Fight } from '../fight';
 import { Round } from '../round';
 import { Category, Skill } from '../skills';
 import { SkillService } from '../skill.service'
 import { EN_ATK, EN_DEF } from '../mock-enemy'
 import { RenderSkillComponent } from '../render-skill/render-skill.component'
 import { RenderRoundComponent } from '../render-round/render-round.component'
-
-function attacks(id: number): boolean {
-  return id % 2 === 0;
-}
+import { RenderFightComponent } from '../render-fight/render-fight.component'
 
 // attacker == true ? me : him
 function makeMove(attack: Skill, defence: Skill, attacker: boolean): Round {
@@ -39,10 +37,6 @@ function makeMove(attack: Skill, defence: Skill, attacker: boolean): Round {
   return r;
 }
 
-function sleep (time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
 @Component({
   selector: 'app-fight',
   templateUrl: './fight.component.html',
@@ -59,8 +53,7 @@ export class FightComponent implements OnInit {
 
   enoughAt : boolean = false;
   enoughDef : boolean = false;
-  continue : boolean = false;
-  renderDuel : boolean = false;
+  removeStartBattleButton : boolean = false;
   fightFinished : boolean = false;
   verdict : string;
 
@@ -70,6 +63,7 @@ export class FightComponent implements OnInit {
   hp : number = 40;
   max_en_hp : number = 40;
   en_hp : number = 40;
+  fight : Fight;
 
   constructor(private skillService: SkillService) { }
 
@@ -82,6 +76,7 @@ export class FightComponent implements OnInit {
       .subscribe(skills => this.skills = skills);
   }
 
+  // skill.type == true ? defence : attack
   addMove(skill: Skill): void{
     if (skill.type && this.defences.length === 6)
     {
@@ -99,65 +94,34 @@ export class FightComponent implements OnInit {
     {
       this.attacks.push(skill);
     }
-    if (this.attacks.length == 6 && this.defences.length == 6)
-    {
-      this.continue = true;
-    }
   }
 
   // who == true ? me : him (who was attacking)
   updateHp(who: boolean, hit: number): void {
-    var barName = "his-bar"
-    var hitName = "his-hit"
-    if (!who)
-    {
-      barName = "my-bar"
-      hitName = "my-hit"
-    }
-    var myBar = document.getElementById(barName);
-    var myHit = document.getElementById(hitName);
-
     if (!who)
     {
       var newValue = this.hp - hit;
-      var barWidth = (newValue / this.max_hp) * 100 + "%";
-      var hitWidth = (hit / this.hp) * 100 + "%";
-      myHit.style.width = hitWidth;
-      setTimeout(function(){
-        myHit.style.width = "0";
-        myBar.style.width = barWidth;
-      }, 500);
       this.hp = newValue;
     }
     else
     {
       var newValue = this.en_hp - hit;
-      var barWidth = (newValue / this.max_en_hp) * 100 + "%";
-      var hitWidth = (hit / this.en_hp) * 100 + "%";
-      myHit.style.width = hitWidth;
-      setTimeout(function(){
-        myHit.style.width = "0";
-        myBar.style.width = barWidth;
-      }, 500);
       this.en_hp = newValue;
     }
   }
 
-  stepDuel(): void{
-    if (this.renderDuel)
+  async stepDuel() {
+    this.removeStartBattleButton = true;
+    this.makeDuel();
+    while (!this.fightFinished)
     {
       this.nextRound();
     }
-    else
-    {
-      this.makeDuel();
-    }
+    this.fight = { rounds: this.rounds, my_hp: this.max_hp, en_hp: this.max_en_hp, verdict: this.verdict };
+
   }
 
   makeDuel(): void{
-    if (!this.continue)
-      return;
-    this.renderDuel = true;
     var i = 0;
     var tmpHp = this.hp;
     var tmpEn_hp = this.en_hp;
